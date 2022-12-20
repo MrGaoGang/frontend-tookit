@@ -1,0 +1,7 @@
+{
+  "extends": "@eggjs/tsconfig",
+  "compilerOptions": {
+    "experimentalDecorators": true
+  },
+  "exclude": ["app/public", "app/views", "node_modules*"]
+}
