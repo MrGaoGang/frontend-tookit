@@ -2,11 +2,11 @@
 
 ## 拥有的能力
 
-- [x]ORM: [prisma](https://www.prisma.io/docs/getting-started/quickstart)
-- [x]eggjs
-- [x]mysql
-- [] redis
-- [] jwt: 登录认证
+- [x] ORM: [prisma](https://www.prisma.io/docs/getting-started/quickstart)
+- [x] eggjs
+- [x] mysql
+- [ ] redis
+- [ ] jwt: 登录认证
 
 
 
