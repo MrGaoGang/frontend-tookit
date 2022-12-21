@@ -2,11 +2,11 @@
 
 ## 拥有的能力
 
-- [x] ORM: [prisma](https://www.prisma.io/docs/getting-started/quickstart)
-- [x] eggjs
-- [x] mysql
-- [ ] redis
-- [x] jwt-token: 基于 jsonwebtoken + koa-jwt; 为什么不使用 egg-jwt? 因为此项目很久没人维护了
+- [x] `ORM`: [prisma](https://www.prisma.io/docs/getting-started/quickstart)
+- [x] `eggjs`
+- [x] `mysql`
+- [ ] `redis`
+- [x] jwt-token: 基于 `jsonwebtoken` + `koa-jwt`; 为什么不使用 egg-jwt? 因为此项目很久没人维护了
   - [x] 用户登录
   - [x] 基于md5的密码加密
   - [x] 用户注册
