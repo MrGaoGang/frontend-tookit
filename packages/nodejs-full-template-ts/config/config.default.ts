@@ -36,6 +36,7 @@ export default (appInfo: EggAppInfo) => {
 
   // jwt
   config.jwt = {
+    // please replace the secret
     secret: '123456'
   }
 
