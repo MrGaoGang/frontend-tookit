@@ -1,5 +1,6 @@
 import { Controller } from 'egg';
 import { StatusCode } from '../const/status';
+import { setTokenToRedis } from '../redis/token';
 import { encode } from '../utils/encode';
 
 export default class AuthorController extends Controller {
@@ -21,6 +22,8 @@ export default class AuthorController extends Controller {
         );
         // update token
         await ctx.service.user.updateUserToken(data.uid, token);
+        // set token to redis
+        await setTokenToRedis(app, data.uid, token);
         ctx.success(
           {
             token
