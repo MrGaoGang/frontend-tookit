@@ -9,9 +9,11 @@
   },
   "scripts": {
     "start": "egg-scripts start --daemon --title=egg-server-egg-prisma-template-ts",
+    "start:docker": "egg-scripts start  --title=egg-server-egg-prisma-template-ts",
     "stop": "egg-scripts stop --title=egg-server-egg-prisma-template-ts",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",
+    "build:docker": "rm -rf logs && rm -rf run && docker build -t prisma-egg-node .",
     "test-local": "egg-bin test",
     "test": "npm run lint -- --fix && npm run test-local",
     "cov": "egg-bin cov",
@@ -21,6 +23,7 @@
     "db:c": "npx prisma migrate dev --name db-change",
     "db:ui": "npx prisma studio",
     "db:pull": "npx prisma db pull",
+    "model:b": "npx prisma generate",
     "lint": "eslint . --ext .ts --resolve-plugins-relative-to .",
     "clean": "ets clean"
   },

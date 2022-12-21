@@ -10,12 +10,12 @@
   - [x] 基于 md5 的密码加密
   - [x] 用户注册
   - [x] 登录态校验
+- [x] `docker`: 利用 docker 一键部署 应用
 - [ ] `redis`
-- [ ] `docker`
 - [ ] `swagger api doc`: 基于 `router` 注解的方式自动生成 api 请求文档;
 - [ ] 微信
   - [x] [微信小程序 登录](https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/others/WeChat_login.html)
-  - [ ] 微信公众号 
+  - [ ] 微信公众号
 - [ ] `github` 登录鉴权
 
 内置的插件:
@@ -115,3 +115,15 @@ npm run dev
 ### 接口测试/鉴权测试
 
 ![](./docs//imgs/test.png)
+
+## 四、打包部署
+
+```bash
+
+# 构建镜像
+docker build -t prisma-egg-node .
+
+# 启动
+docker run -p 7001:7001 -d --name prisma-egg-node-instance prisma-egg-node
+
+```
