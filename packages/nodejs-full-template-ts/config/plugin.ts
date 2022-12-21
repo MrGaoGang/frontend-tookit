@@ -1,11 +1,8 @@
-import { EggPlugin, EggPluginItem } from 'egg';
-
-type PluginCustom = {
-  cors: EggPluginItem
-};
+import { EggPlugin } from 'egg';
 
 
-const plugin: EggPlugin & PluginCustom = {
+
+const plugin: EggPlugin  = {
   static: true,
   // nunjucks: {
   //   enable: true,
@@ -15,6 +12,10 @@ const plugin: EggPlugin & PluginCustom = {
     enable: true,
     package: 'egg-cors',
   },
+  routerPlus : {
+    enable: true,
+    package: 'egg-router-plus',
+  }
 };
 
 export default plugin;
