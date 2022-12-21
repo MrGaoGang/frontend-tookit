@@ -16,7 +16,7 @@ importers:
       husky: 8.0.2
       lint-staged: 13.1.0
 
-  packages/nodejs-full-template-ts:
+  packages/egg-prisma-template-ts:
     specifiers:
       '@eggjs/tsconfig': ^1.0.0
       '@types/mocha': ^2.2.40
