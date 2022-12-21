@@ -6,7 +6,7 @@ export default class HomeController extends Controller {
     const data = await ctx.service.test.findOrCreate();
     ctx.success(data);
   }
-  public async allUsers(){
+  public async allUsers() {
     const { ctx } = this;
     const data = await ctx.service.test.findAllUsers();
     ctx.success(data);

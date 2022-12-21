@@ -26,7 +26,9 @@
   },
   "dependencies": {
     "@prisma/client": "^4.7.1",
+    "axios": "^1.2.1",
     "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.3",
     "egg": "^3.9.1",
     "egg-cors": "^2.2.3",
     "egg-router-plus": "^2.0.0",

@@ -1,5 +1,5 @@
 import { Application } from 'egg'
-import { API_LOGIN_ROUTER } from './router/const'
+import { API_LOGIN_ROUTER, API_WECHAT_LOGIN_ROUTER } from './router/const'
 export default (app: Application) => {
   const { controller, router } = app
   router.get('/', controller.home.index)
@@ -12,4 +12,11 @@ export default (app: Application) => {
   // login 
   router.post(API_LOGIN_ROUTER.LOGIN, app.controller.auth.login);
   router.post(API_LOGIN_ROUTER.REGISTER, app.controller.auth.register);
+
+  // ========== wechat login ===========
+
+  // mini login
+  router.get(API_WECHAT_LOGIN_ROUTER.MINI_LOGIN, app.controller.wechat.miniLogin);
+
+
 }

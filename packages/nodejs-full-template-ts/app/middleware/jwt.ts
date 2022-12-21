@@ -1,8 +1,12 @@
 import { Context } from 'egg'
 import { StatusCode } from '../const/status'
-import { API_LOGIN_ROUTER } from '../router/const'
+import { API_LOGIN_ROUTER, API_WECHAT_LOGIN_ROUTER } from '../router/const'
 
-const whitePathList = [API_LOGIN_ROUTER.LOGIN, API_LOGIN_ROUTER.REGISTER]
+const whitePathList = [
+  API_LOGIN_ROUTER.LOGIN,
+  API_LOGIN_ROUTER.REGISTER,
+  API_WECHAT_LOGIN_ROUTER.MINI_LOGIN
+]
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default (_options: any) => {
