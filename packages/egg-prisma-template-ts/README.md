@@ -329,15 +329,15 @@ npm run dev
 
 ### 用户注册
 
-![](./docs//imgs/register.png)
+![](https://cdn-1252273386.cos.ap-guangzhou.myqcloud.com/images/7f16f2a02684c7308c0ecdbd4f612cf0.png)
 
 ### 用户登录
 
-![](./docs//imgs/login.png)
+![](https://cdn-1252273386.cos.ap-guangzhou.myqcloud.com/images/32e86ebdb246f799f4d2ea455210f498.png)
 
 ### 接口测试/鉴权测试
 
-![](./docs//imgs/test.png)
+![](https://cdn-1252273386.cos.ap-guangzhou.myqcloud.com/images/a42a634911ee5ccc6478308cbdfbdb00.png)
 
 ## 五、打包部署
 
