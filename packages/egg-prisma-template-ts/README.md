@@ -22,7 +22,7 @@
   - [ ] 微信公众号 登录
 - [ ] `github` 登录鉴权
 
-内置的插件:
+eggjs 内置的插件:
 
 - [onerror](https://github.com/eggjs/egg-onerror) 统一异常处理
 - [Session](https://github.com/eggjs/egg-session) Session 实现
@@ -36,6 +36,58 @@
 - [static](https://github.com/eggjs/egg-static) 静态服务器
 - [jsonp](https://github.com/eggjs/egg-jsonp) jsonp 支持
 - [view](https://github.com/eggjs/egg-view) 模板引擎
+
+**模板目录说明**
+
+```bash
+├─.dockerignore 
+├─.env -------------------- // 环境变量配置
+├─Dockerfile -------------- // docker 构建
+├─README.md 
+├─app 
+│ ├─common ---------------- // 公共库
+│ ├─const ----------------- // 常量
+│ │ └─status.ts 
+│ ├─controller 
+│ │ ├─auth.ts ------------- // 登录/权限校验【建议保留】
+│ │ ├─file.ts ------------- // 文件上传/cos/oss【建议保留】
+│ │ ├─home.ts ------------- // 测试
+│ │ ├─test.ts ------------- // 测试使用
+│ │ └─wechat.ts ----------- // 微信登录【建议保留】
+│ ├─extend ---------------- // egg 扩展
+│ │ ├─application.ts ------ // 主要扩展了 prisma/cos/jwt
+│ │ └─context.ts 
+│ ├─middleware ------------ // 中间件
+│ │ ├─error.ts 
+│ │ └─jwt.ts -------------- // token校验
+│ ├─public 
+│ │ └─file-upload.html ---- // 文件上传测试
+│ ├─redis ----------------- // redis 处理
+│ │ └─token.ts 
+│ ├─router.ts ------------- // 路由配置
+│ ├─service 
+│ │ ├─file.ts ------------- // 文件操作
+│ │ ├─test.ts 
+│ │ ├─user.ts ------------- // 用户注册/登录
+│ │ └─wechat.ts ----------- // 微信登录
+│ └─utils ----------------- // 一些工具函数
+│   ├─cos.ts 
+│   ├─encode.ts 
+│   ├─file.ts 
+│   ├─uid.ts 
+│   └─user-info.ts 
+├─app.ts 
+├─config 
+│ ├─config.default.ts ----- // 【重要】各种能力配置
+│ ├─config.local.ts 
+│ ├─config.prod.ts 
+│ └─plugin.ts 
+├─package.json 
+├─prisma 
+│ └─schema.prisma --------- // 【重要】ORM Model维护
+└─tsconfig.json 
+
+```
 
 ## 二、如何使用
 
