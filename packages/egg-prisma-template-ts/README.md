@@ -16,11 +16,12 @@
   - ✅ 上传文件到本地
   - ✅ 上传文件到腾讯云 `cos`
   - ✅ 上传文件到阿里云 `oss`
-- [ ] `swagger api doc`: 基于 `router` 注解的方式自动生成 api 请求文档;
 - [ ] 微信
   - ✅ [微信小程序 登录](https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/others/WeChat_login.html)
   - [ ] 微信公众号 登录
 - [ ] `github` 登录鉴权
+- [ ] `swagger api doc`: 基于 `router` 注解的方式自动生成 api 请求文档;
+
 
 eggjs 内置的插件:
 
@@ -37,8 +38,28 @@ eggjs 内置的插件:
 - [jsonp](https://github.com/eggjs/egg-jsonp) jsonp 支持
 - [view](https://github.com/eggjs/egg-view) 模板引擎
 
-**模板目录说明**
+## 二、如何使用
 
+### 安装模板
+
+```bash
+
+git clone https://github.com/MrGaoGang/frontend-tookit.git
+
+# 复制 egg-prisma-template-ts 即可
+
+```
+
+### 安装依赖
+
+```bash
+# 安装依赖
+npm i
+# 启动项目
+npm run dev
+```
+
+### 模板目录说明
 ```bash
 ├─.dockerignore 
 ├─.env -------------------- // 环境变量配置
@@ -89,23 +110,7 @@ eggjs 内置的插件:
 
 ```
 
-## 二、如何使用
 
-### 安装模板
-
-```bash
-
-
-```
-
-### 安装依赖
-
-```bash
-# 安装依赖
-npm i
-# 启动项目
-npm run dev
-```
 
 ## 三、项目配置
 
