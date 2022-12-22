@@ -29,7 +29,9 @@
   },
   "dependencies": {
     "@prisma/client": "^4.7.1",
+    "await-stream-ready": "^1.0.1",
     "axios": "^1.2.1",
+    "cos-nodejs-sdk-v5": "^2.11.18",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",
     "egg": "^3.9.1",
@@ -40,6 +42,7 @@
     "ioredis": "^5.2.4",
     "jsonwebtoken": "^8.5.1",
     "koa-jwt": "^4.0.3",
+    "stream-wormhole": "^1.1.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

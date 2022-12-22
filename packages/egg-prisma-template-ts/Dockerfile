@@ -5,7 +5,7 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 # 复制packages.json
 COPY package*.json /usr/src/app
-# 安装依赖
+# 安装依赖；由于会使用dev的依赖 去编译ts定义，所以不要使用纯 --production 安装依赖
 RUN npm install
 # 复制所有文件到工作目录
 ADD . /usr/src/app

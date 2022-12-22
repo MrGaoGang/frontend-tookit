@@ -1,12 +1,13 @@
 import { Context } from 'egg'
 import { StatusCode } from '../const/status'
 import { getTokenFromRedis } from '../redis/token'
-import { API_LOGIN_ROUTER, API_WECHAT_LOGIN_ROUTER } from '../router/const'
+import { API_FILE_UPLOAD_ROUTE, API_LOGIN_ROUTER, API_WECHAT_LOGIN_ROUTER } from '../router/const'
 
 const whitePathList = [
   API_LOGIN_ROUTER.LOGIN,
   API_LOGIN_ROUTER.REGISTER,
-  API_WECHAT_LOGIN_ROUTER.MINI_LOGIN
+  API_WECHAT_LOGIN_ROUTER.MINI_LOGIN,
+  API_FILE_UPLOAD_ROUTE.UPLOAD_MANG
 ]
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

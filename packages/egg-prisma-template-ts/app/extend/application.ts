@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client'
-
 import koajwt from 'koa-jwt'
 import jwt, {
   Secret,
@@ -11,6 +10,7 @@ import jwt, {
   Jwt
 } from 'jsonwebtoken'
 import { EggAppConfig } from 'egg'
+import {cos} from '../utils/cos'
 const JWT = Symbol('Application#jwt')
 const prisma = new PrismaClient()
 
@@ -40,7 +40,7 @@ type JWTToken = {
     secretOrPrivateKey: string,
     options?: VerifyOptions,
     callback?: VerifyCallback
-  ): string
+  ): Record<string, any>
 
   /**
    * call jsonwebtoken's decode() method
@@ -51,6 +51,7 @@ type JWTToken = {
 
 export default {
   prisma,
+  cos,
   get jwt(): JWTToken {
     if (!this[JWT]) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment

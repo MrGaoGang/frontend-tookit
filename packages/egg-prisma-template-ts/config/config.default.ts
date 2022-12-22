@@ -37,7 +37,7 @@ export default (appInfo: EggAppInfo) => {
   // jwt
   config.jwt = {
     // please replace the secret
-    secret: '123456'
+    secret: process.env.JWT_TOKEN_SECRET || 'mrgaogang'
   };
 
   // redis use  ioredisv5
@@ -53,6 +53,36 @@ export default (appInfo: EggAppInfo) => {
       // weakDependent: true,
     }
   };
+
+  // https://eggjs.github.io/zh/guide/upload.html#%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F
+  // upload file comnfig
+  config.multipart = {
+    // new extension
+    fileExtensions: ['.mov', '.mp4'],
+    // form field name size
+    fieldNameSize: 100,
+    // form field  size
+    fieldSize: '1gb',
+    // form max field number
+    fields: 10,
+    // single file size
+    fileSize: '300mb',
+    // max upload file number
+    files: 10
+  };
+
+  if (process.env.FILE_UPLOAD_TYPE === 'oss') {
+    // https://github.com/eggjs/egg-oss
+    config.oss = {
+      region: process.env.FILE_UPLOAD_OSS_REGION,
+      accessKeyId: process.env.FILE_UPLOAD_OSS_ACCESS_KEY,
+      accessKeySecret: process.env.FILE_UPLOAD_OSS_ACCESS_SECRET,
+      bucket: process.env.FILE_UPLOAD_OSS_BUCKET,
+      endpoint: process.env.FILE_UPLOAD_OSS_ENDPOINT,
+      timeout: '60s'
+    };
+  }
+
   // the return config will combines to EggAppConfig
   return {
     ...config,

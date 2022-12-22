@@ -23,7 +23,7 @@ export default {
        * response to error
        * @param msg  error message
        */
-  fail(msg = 'Internal error!') {
+  fail(msg = 'Server Internal error!') {
     this.result(500, msg, {}, false);
   },
 };

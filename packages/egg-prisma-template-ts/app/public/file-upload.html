@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST" action="/api/file/upload?user_id=91d91f98-cf1d-41c7-9836-266474d24282&_csrf={{ ctx.csrf | safe }}"  enctype="multipart/form-data">
+        title: <input name="title" />
+      
+        <!-- 只能有一个 File，且必须放在最后-->
+        file: <input name="file" type="file" multiple />
+        <button type="submit">Upload</button>
+      </form>
+</body>
+</html>

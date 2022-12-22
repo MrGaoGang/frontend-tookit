@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid'
  */
 export default class TestServices extends Service {
   async findAllUsers(): Promise<User[]> {
-    const { prisma } = this.app
+    const { prisma } = this.app    
     return await prisma.user.findMany()
   }
   /**

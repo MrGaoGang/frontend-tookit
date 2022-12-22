@@ -8,17 +8,30 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
+  id       Int         @id @default(autoincrement())
   email    String?
   username String
   password String
-  uid      String  @unique
-  token    UserToken? 
+  uid      String      @unique
+  files    UserFiles[]
+  token    UserToken?
 }
 
 model UserToken {
-  id       Int     @id @default(autoincrement())
-  token    String  @db.VarChar(500)
-  user     User    @relation(fields: [uid], references: [uid])
-  uid      String  @unique
+  id    Int    @id @default(autoincrement())
+  token String @db.VarChar(500)
+  uid   String @unique
+  user  User   @relation(fields: [uid], references: [uid])
+}
+
+model UserFiles {
+  id       Int      @id @default(autoincrement())
+  filename String   @db.VarChar(500)
+  extname  String
+  path     String   @db.VarChar(500)
+  createAt DateTime @default(now())
+  uid      String
+  user     User     @relation(fields: [uid], references: [uid])
+
+  @@index([uid], map: "UserFiles_uid_fkey")
 }
