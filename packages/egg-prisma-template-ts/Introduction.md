@@ -2,7 +2,7 @@
 
 很多时候除开工作，偶尔也喜欢自己在家写一些小东西(小程序、"小网站" 等); 每次都需要 拿 koa/eggjs/nest 去搭建一个 全新的项目，需要多次的处理登录、鉴权、文件上传 等问题；耗时且耗力。
 
-于是本人基于之前开发的一些 node 服务；抽离成了一个简单的 [基于 docker 的 prisma + eggjs + typescript 的后端请求模板](https://github.com/MrGaoGang/frontend-tookit/tree/main/packages/egg-prisma-template-ts)；有需要的同学可以尝试尝试。
+于是本人基于之前开发的一些 node 服务；抽离成了一个简单的 [基于 docker 的 prisma + eggjs + typescript 的后端请求模板](https://github.com/MrGaoGang/frontend-tookit/tree/main/packages/egg-prisma-template-ts)；这样后续就不用每次都单独搭建；如有需要的同学可以尝试尝试。
 
 **聊聊选型吧**
 
@@ -56,16 +56,16 @@
   - ✅ 基于 md5 的密码加密
   - ✅ 用户注册
   - ✅ 登录态校验
-- ✅ `docker`: 利用 docker 一键部署 应用
+- ✅ `docker`: 利用 docker 应用部署
 - ✅ `redis`: 基于 [ioredis@v5](https://github.com/luin/ioredis) 的 redis 方案
 - ✅ 多文件上传
   - ✅ 上传文件到本地
   - ✅ 上传文件到腾讯云 `cos`
   - ✅ 上传文件到阿里云 `oss`
+- ✅  `github` 登录鉴权
 - [ ] 微信
   - ✅ [微信小程序 登录](https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/others/WeChat_login.html)
   - [ ] 微信公众号 登录
-- [ ] `github` 登录鉴权
 - [ ] `swagger api doc`: 基于 `router` 注解的方式自动生成 api 请求文档;
 
 
@@ -355,6 +355,79 @@ WECHAT_MINI_APP_SECRET= "your wechat secret"
 xxx/wechat/mini/login?js_code=fghjklkhgfghjk
 
 ```
+
+### 6. github 登录
+
+要使用登录的前置准备
+
+- 打开 Setting > Developer setting > OAuth applications
+- 点击 Register a new application
+- 填入基本的 app 信息
+  ![](https://cdn-1252273386.cos.ap-guangzhou.myqcloud.com/images/70f307e9872a4a45dc4b749ae13730cb.png)
+- 生成 client_id 和 client_secret
+
+![](https://cdn-1252273386.cos.ap-guangzhou.myqcloud.com/images/5f6361777e20abbea28e324d92b84295.png)
+
+1. 在 `.env`文件中配置上面的 id 和 secret
+
+```bash
+
+GITHUB_LOGIN_CLIENT_ID = "你自己的Id" # 记得换成自己的github 注册app 时生成的clientid
+GITHUB_LOGIN_CLIENT_SECRET = "你自己的secretid"
+
+
+```
+
+2. **前端访问如下地址即可获取用户信息**
+
+```bash
+https://github.com/login/oauth/authorize?client_id=申请的Client ID&scope=user:email
+```
+
+**返回的用户信息**
+
+```json
+{
+  "code": 200,
+  "success": true,
+  "msg": "success",
+  "data": {
+    "login": "MrGaoGang",
+    "avatar_url": "https://avatars.githubusercontent.com/u/26522968?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/MrGaoGang",
+    "html_url": "https://github.com/MrGaoGang",
+    "followers_url": "https://api.github.com/users/MrGaoGang/followers",
+    "following_url": "https://api.github.com/users/MrGaoGang/following{/other_user}",
+    "gists_url": "https://api.github.com/users/MrGaoGang/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/MrGaoGang/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/MrGaoGang/subscriptions",
+    "organizations_url": "https://api.github.com/users/MrGaoGang/orgs",
+    "repos_url": "https://api.github.com/users/MrGaoGang/repos",
+    "events_url": "https://api.github.com/users/MrGaoGang/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/MrGaoGang/received_events",
+    "type": "User",
+    "site_admin": false,
+    "name": "高先生",
+    "company": null,
+    "blog": "https://mrgaogang.github.io",
+    "location": "Shenzhen",
+    "email": "gaogangwork@qq.com",
+    "hireable": null,
+    "bio": "Front-end developer【Mendix,\r\nAndroid、RN、Vue、React、iOS、Cocos2d、微信小程序】",
+    "twitter_username": null,
+    "public_repos": 67,
+    "public_gists": 0,
+    "followers": 74,
+    "following": 5,
+    "created_at": "2017-03-19T13:47:28Z",
+    "updated_at": "2022-12-18T12:33:28Z"
+  }
+}
+```
+
+访问用户信息失败？检查一下你的网络是否可以访问 github
+
 
 ## 五、项目测试
 

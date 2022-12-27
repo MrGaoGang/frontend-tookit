@@ -10,18 +10,17 @@
   - ✅ 基于 md5 的密码加密
   - ✅ 用户注册
   - ✅ 登录态校验
-- ✅ `docker`: 利用 docker 一键部署 应用
+- ✅ `docker`: 利用 docker 应用部署
 - ✅ `redis`: 基于 [ioredis@v5](https://github.com/luin/ioredis) 的 redis 方案
 - ✅ 多文件上传
   - ✅ 上传文件到本地
   - ✅ 上传文件到腾讯云 `cos`
   - ✅ 上传文件到阿里云 `oss`
+- ✅ `github` 登录鉴权
 - [ ] 微信
   - ✅ [微信小程序 登录](https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/others/WeChat_login.html)
   - [ ] 微信公众号 登录
-- [ ] `github` 登录鉴权
 - [ ] `swagger api doc`: 基于 `router` 注解的方式自动生成 api 请求文档;
-
 
 eggjs 内置的插件:
 
@@ -60,16 +59,17 @@ npm run dev
 ```
 
 ### 模板目录说明
+
 ```bash
-├─.dockerignore 
+├─.dockerignore
 ├─.env -------------------- // 环境变量配置
 ├─Dockerfile -------------- // docker 构建
-├─README.md 
-├─app 
+├─README.md
+├─app
 │ ├─common ---------------- // 公共库
 │ ├─const ----------------- // 常量
-│ │ └─status.ts 
-│ ├─controller 
+│ │ └─status.ts
+│ ├─controller
 │ │ ├─auth.ts ------------- // 登录/权限校验【建议保留】
 │ │ ├─file.ts ------------- // 文件上传/cos/oss【建议保留】
 │ │ ├─home.ts ------------- // 测试
@@ -77,40 +77,38 @@ npm run dev
 │ │ └─wechat.ts ----------- // 微信登录【建议保留】
 │ ├─extend ---------------- // egg 扩展
 │ │ ├─application.ts ------ // 主要扩展了 prisma/cos/jwt
-│ │ └─context.ts 
+│ │ └─context.ts
 │ ├─middleware ------------ // 中间件
-│ │ ├─error.ts 
+│ │ ├─error.ts
 │ │ └─jwt.ts -------------- // token校验
-│ ├─public 
+│ ├─public
 │ │ └─file-upload.html ---- // 文件上传测试
 │ ├─redis ----------------- // redis 处理
-│ │ └─token.ts 
+│ │ └─token.ts
 │ ├─router.ts ------------- // 路由配置
-│ ├─service 
+│ ├─service
 │ │ ├─file.ts ------------- // 文件操作
-│ │ ├─test.ts 
+│ │ ├─test.ts
 │ │ ├─user.ts ------------- // 用户注册/登录
 │ │ └─wechat.ts ----------- // 微信登录
 │ └─utils ----------------- // 一些工具函数
-│   ├─cos.ts 
-│   ├─encode.ts 
-│   ├─file.ts 
-│   ├─uid.ts 
-│   └─user-info.ts 
-├─app.ts 
-├─config 
+│   ├─cos.ts
+│   ├─encode.ts
+│   ├─file.ts
+│   ├─uid.ts
+│   └─user-info.ts
+├─app.ts
+├─config
 │ ├─config.default.ts ----- // 【重要】各种能力配置
-│ ├─config.local.ts 
-│ ├─config.prod.ts 
-│ └─plugin.ts 
-├─package.json 
-├─prisma 
+│ ├─config.local.ts
+│ ├─config.prod.ts
+│ └─plugin.ts
+├─package.json
+├─prisma
 │ └─schema.prisma --------- // 【重要】ORM Model维护
-└─tsconfig.json 
+└─tsconfig.json
 
 ```
-
-
 
 ## 三、项目配置
 
@@ -229,8 +227,7 @@ this.app.redis.get(key);
 
 体验测试:
 
-> 启动后访问 `http://localhost:7001/public/file-upload.html` 页面 修改一下 里面的 `user_id` 为自己的 用户id
-
+> 启动后访问 `http://localhost:7001/public/file-upload.html` 页面 修改一下 里面的 `user_id` 为自己的 用户 id
 
 **文件大小/后缀配置**
 
@@ -377,6 +374,78 @@ WECHAT_MINI_APP_SECRET= "your wechat secret"
 xxx/wechat/mini/login?js_code=fghjklkhgfghjk
 
 ```
+
+### 6. github 登录
+
+要使用登录的前置准备
+
+- 打开 Setting > Developer setting > OAuth applications
+- 点击 Register a new application
+- 填入基本的 app 信息
+  ![](https://cdn-1252273386.cos.ap-guangzhou.myqcloud.com/images/70f307e9872a4a45dc4b749ae13730cb.png)
+- 生成 client_id 和 client_secret
+
+![](https://cdn-1252273386.cos.ap-guangzhou.myqcloud.com/images/5f6361777e20abbea28e324d92b84295.png)
+
+1. 在 `.env`文件中配置上面的 id 和 secret
+
+```bash
+
+GITHUB_LOGIN_CLIENT_ID = "你自己的" # 记得换成自己的github 注册app 时生成的clientid
+GITHUB_LOGIN_CLIENT_SECRET = "你自己的secret id"
+
+
+```
+
+2. **前端访问如下地址即可获取用户信息**
+
+```bash
+https://github.com/login/oauth/authorize?client_id=申请的Client ID&scope=user:email
+```
+
+**返回的用户信息**
+
+```json
+{
+  "code": 200,
+  "success": true,
+  "msg": "success",
+  "data": {
+    "login": "MrGaoGang",
+    "avatar_url": "https://avatars.githubusercontent.com/u/26522968?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/MrGaoGang",
+    "html_url": "https://github.com/MrGaoGang",
+    "followers_url": "https://api.github.com/users/MrGaoGang/followers",
+    "following_url": "https://api.github.com/users/MrGaoGang/following{/other_user}",
+    "gists_url": "https://api.github.com/users/MrGaoGang/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/MrGaoGang/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/MrGaoGang/subscriptions",
+    "organizations_url": "https://api.github.com/users/MrGaoGang/orgs",
+    "repos_url": "https://api.github.com/users/MrGaoGang/repos",
+    "events_url": "https://api.github.com/users/MrGaoGang/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/MrGaoGang/received_events",
+    "type": "User",
+    "site_admin": false,
+    "name": "高先生",
+    "company": null,
+    "blog": "https://mrgaogang.github.io",
+    "location": "Shenzhen",
+    "email": "gaogangwork@qq.com",
+    "hireable": null,
+    "bio": "Front-end developer【Mendix,\r\nAndroid、RN、Vue、React、iOS、Cocos2d、微信小程序】",
+    "twitter_username": null,
+    "public_repos": 67,
+    "public_gists": 0,
+    "followers": 74,
+    "following": 5,
+    "created_at": "2017-03-19T13:47:28Z",
+    "updated_at": "2022-12-18T12:33:28Z"
+  }
+}
+```
+
+访问用户信息失败？检查一下你的网络是否可以访问 github
 
 ## 四、项目测试
 

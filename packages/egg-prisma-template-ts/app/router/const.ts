@@ -1,8 +1,9 @@
-const PREFIX = `/api`;
+const PREFIX = '/api';
 
 export const API_LOGIN_ROUTER = {
   LOGIN: PREFIX + '/auth/login',
-  REGISTER: PREFIX + '/auth/register'
+  REGISTER: PREFIX + '/auth/register',
+  GITHUB_LOGIN: PREFIX + '/github/login'
 };
 
 export const API_WECHAT_LOGIN_ROUTER = {
