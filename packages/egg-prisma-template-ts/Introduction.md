@@ -1,11 +1,57 @@
-# 基于 docker 的 prisma + eggjs + typescript 的后端请求模板
+## 一、前言
 
-## 一、拥有的能力
+很多时候除开工作，偶尔也喜欢自己在家写一些小东西(小程序、"小网站" 等); 每次都需要 拿 koa/eggjs/nest 去搭建一个 全新的项目，需要多次的处理登录、鉴权、文件上传 等问题；耗时且耗力。
+
+于是本人基于之前开发的一些 node 服务；抽离成了一个简单的 [基于 docker 的 prisma + eggjs + typescript 的后端请求模板](https://github.com/MrGaoGang/frontend-tookit/tree/main/packages/egg-prisma-template-ts)；有需要的同学可以尝试尝试。
+
+**聊聊选型吧**
+
+- **先聊一聊 node 框架选型: `eggjs` vs `nestjs`**
+  
+  之所以没有把`koa`+ `express` + `nextjs` 纳入进来；一方面是希望基于一定的开发规范/约束去做；其次后续准备做一个基于`umi + ant-pro`的前端业务模板；所以暂不考虑 `ssr`。
+  - **`nestjs`**
+    - 对 ts 天然支持良好
+    - 基于 类 `SpringBoot` 的 MVC 思路
+    - 通过模块容器-依赖注入维护组件树的模式解决了到处写 import/require 的问题, 不再需要手动维护模块之间的依赖关系;
+    - 将现有开发中的一些功能 归纳为 统一的概念: filter、pipe、guard、interceptor
+    - 天然支持微服务
+    - 自带 swagger 接口文档生成功能
+    - 统一约束和规范, 对开发人员强约束
+  - **`eggjs`**
+    - 通过载入代码-自动挂载代码到对象的方式解决了到处写 import/require 的问题, 不再需要手动维护模块之间的依赖关系;
+    - 通过 框架核心 + 插件机制 解耦；大部分的能力通过插件去完成
+    - 插件较为丰富，很多功能都有（虽说有些已经停止维护）
+    - 学习成本较低，没有太大的心智负担
+    - eggjs 实现了 cluser, 自带进程管理和进程间通信功能, 无需额外的 pm2
+
+> 虽说两个框架都使用过，但是对应要**快速的、没有太多学习成本**的去构造一个 `node` 应用；我这边选择了 `eggjs` 作为基础目标; 对于 `typscript` `eggjs` 不支持的问题，社区已有解决方案; 对于 eggjs 很多插件不维护的情况，我这边把 使用到的插件重新内置到项目内，并更新了对应的依赖。其次 有一个不太满意的是，现有的基于装饰器去声明路由，没有一个太好的解决方案，大多还是 要么声明路由，要么单独处理 swagger 文档。这块后续我希望能做成类似于 nestjs 的方式
+
+- **再聊一聊 ORM 选型吧 prisma vs sequlize vs typeorm**
+
+> 如下借用 [prisma vs sequlize](https://www.prisma.io/docs/concepts/more/comparisons/prisma-and-sequelize) 和 [prisma vs typeorm](https://www.prisma.io/docs/concepts/more/comparisons/prisma-and-typeorm)
+
+- `Sequelize` 是一种传统的 ORM，它将表映射到模型类。模型类的实例然后在运行时为应用程序提供 CRUD 查询的接口。
+- `TypeORM` 是一种传统的 ORM，它将表映射到模型类。这些模型类可用于生成 SQL 迁移。模型类的实例然后在运行时为应用程序提供 CRUD 查询的接口
+- `Prisma` 是一种新型的 ORM，它减轻了传统 ORM 的许多问题，例如臃肿的模型实例、混合业务与存储逻辑、缺乏类型安全性或由延迟加载引起的不可预测的查询
+
+> 说一下个人使用真实感受:
+>
+> 1. **prisma 的文档写的真的很详细；官方网站的 UI 设计/配图 真的很用心**;
+> 2. prisma 默认支持 ts，相比 sequlize 要好很多
+> 3. 基于 `schema.prisma` 去描述 model，自动同步数据库；提供了 cli 及 可视化 UI 迁移数据 及 查看数据之间的关联关系
+
+
+
+## 二、模板有哪些功能
+
+模板地址:  [egg-prisma-template-ts](https://github.com/MrGaoGang/frontend-tookit/tree/main/packages/egg-prisma-template-ts)
+
+**支持能力(持续完善中)**
 
 - ✅ [prisma](https://www.prisma.io/docs/getting-started/quickstart): `ORM` 框架
 - ✅ [`eggjs`](https://www.eggjs.org/zh-CN/tutorials/typescript): 基于 Koa2 的企业级 node 框架
 - ✅ `mysql`: 默认使用 `mysql`, 也可一键切换成 `PostgreSQL` 、 `SQL Server`
-- ✅ jwt-token: 基于 `jsonwebtoken` + `koa-jwt`; 为什么不使用 egg-jwt? 因为此项目很久没人维护了
+- ✅ jwt-token: 基于 `jsonwebtoken` + `koa-jwt`; （为什么不使用 egg-jwt? 因为此项目很久没人维护了）
   - ✅ 用户登录
   - ✅ 基于 md5 的密码加密
   - ✅ 用户注册
@@ -23,22 +69,7 @@
 - [ ] `swagger api doc`: 基于 `router` 注解的方式自动生成 api 请求文档;
 
 
-eggjs 内置的插件:
-
-- [onerror](https://github.com/eggjs/egg-onerror) 统一异常处理
-- [Session](https://github.com/eggjs/egg-session) Session 实现
-- [i18n](https://github.com/eggjs/egg-i18n) 多语言
-- [watcher](https://github.com/eggjs/egg-watcher) 文件和文件夹监控
-- [multipart](https://github.com/eggjs/egg-multipart) 文件流式上传
-- [security](https://github.com/eggjs/egg-security) 安全
-- [development](https://github.com/eggjs/egg-development) 开发环境配置
-- [logrotator](https://github.com/eggjs/egg-logrotator) 日志切分
-- [schedule](https://github.com/eggjs/egg-schedule) 定时任务
-- [static](https://github.com/eggjs/egg-static) 静态服务器
-- [jsonp](https://github.com/eggjs/egg-jsonp) jsonp 支持
-- [view](https://github.com/eggjs/egg-view) 模板引擎
-
-## 二、如何使用
+## 三、如何使用
 
 ### 安装模板
 
@@ -59,60 +90,7 @@ npm i
 npm run dev
 ```
 
-### 模板目录说明
-```bash
-├─.dockerignore 
-├─.env -------------------- // 环境变量配置
-├─Dockerfile -------------- // docker 构建
-├─README.md 
-├─app 
-│ ├─common ---------------- // 公共库
-│ ├─const ----------------- // 常量
-│ │ └─status.ts 
-│ ├─controller 
-│ │ ├─auth.ts ------------- // 登录/权限校验【建议保留】
-│ │ ├─file.ts ------------- // 文件上传/cos/oss【建议保留】
-│ │ ├─home.ts ------------- // 测试
-│ │ ├─test.ts ------------- // 测试使用
-│ │ └─wechat.ts ----------- // 微信登录【建议保留】
-│ ├─extend ---------------- // egg 扩展
-│ │ ├─application.ts ------ // 主要扩展了 prisma/cos/jwt
-│ │ └─context.ts 
-│ ├─middleware ------------ // 中间件
-│ │ ├─error.ts 
-│ │ └─jwt.ts -------------- // token校验
-│ ├─public 
-│ │ └─file-upload.html ---- // 文件上传测试
-│ ├─redis ----------------- // redis 处理
-│ │ └─token.ts 
-│ ├─router.ts ------------- // 路由配置
-│ ├─service 
-│ │ ├─file.ts ------------- // 文件操作
-│ │ ├─test.ts 
-│ │ ├─user.ts ------------- // 用户注册/登录
-│ │ └─wechat.ts ----------- // 微信登录
-│ └─utils ----------------- // 一些工具函数
-│   ├─cos.ts 
-│   ├─encode.ts 
-│   ├─file.ts 
-│   ├─uid.ts 
-│   └─user-info.ts 
-├─app.ts 
-├─config 
-│ ├─config.default.ts ----- // 【重要】各种能力配置
-│ ├─config.local.ts 
-│ ├─config.prod.ts 
-│ └─plugin.ts 
-├─package.json 
-├─prisma 
-│ └─schema.prisma --------- // 【重要】ORM Model维护
-└─tsconfig.json 
-
-```
-
-
-
-## 三、项目配置
+## 四、项目配置
 
 ### 1. 配置数据库 及 使用
 
@@ -378,7 +356,7 @@ xxx/wechat/mini/login?js_code=fghjklkhgfghjk
 
 ```
 
-## 四、项目测试
+## 五、项目测试
 
 ```bash
 npm run dev
@@ -396,7 +374,7 @@ npm run dev
 
 ![](https://cdn-1252273386.cos.ap-guangzhou.myqcloud.com/images/a42a634911ee5ccc6478308cbdfbdb00.png)
 
-## 五、打包部署
+## 六、打包部署
 
 ```bash
 
