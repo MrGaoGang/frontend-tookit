@@ -48,7 +48,7 @@ export default (appInfo: EggAppInfo) => {
       port: process.env.REDIS_PORT || 6379, // Redis port
       host: process.env.REDIS_HOST || '127.0.0.1', // Redis host
       password: process.env.REDIS_PASSWORD || 'auth',
-      db: 0
+      db: 0,
       // this redis instance won't block app start
       weakDependent: true,
     }
