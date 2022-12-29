@@ -47,13 +47,14 @@ eggjs 内置的插件:
 
 git clone https://github.com/MrGaoGang/frontend-tookit.git
 
-# 复制 egg-prisma-template-ts 即可
-
 ```
 
 ### 安装依赖
 
 ```bash
+# 切换到  egg-prisma-template-ts 目录
+cd egg-prisma-template-ts
+
 # 安装依赖
 npm i
 # 启动项目
