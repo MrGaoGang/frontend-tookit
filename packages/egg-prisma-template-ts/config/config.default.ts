@@ -50,7 +50,7 @@ export default (appInfo: EggAppInfo) => {
       password: process.env.REDIS_PASSWORD || 'auth',
       db: 0
       // this redis instance won't block app start
-      // weakDependent: true,
+      weakDependent: true,
     }
   };
 
