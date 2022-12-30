@@ -125,6 +125,8 @@ DATABASE_URL="mysql://root:my-secret-pw@localhost:3307/node_template"
 
 ```
 
+若要配置[多个数据库链接，可以点击这里看看](https://github.com/prisma/prisma/issues/2443#issuecomment-630679118) 
+
 同步数据库+基础表
 
 ```bash
