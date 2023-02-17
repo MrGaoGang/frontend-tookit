@@ -1,6 +1,6 @@
 # 基于 docker 的 prisma + eggjs + typescript 的后端请求模板
 
->  如果有用记得点击一下  ⭐️ 哦
+> 如果有用记得点击一下 ⭐️ 哦
 
 ## 一、拥有的能力
 
@@ -53,20 +53,16 @@ git clone https://github.com/MrGaoGang/frontend-tookit.git
 
 > 若有修改 mysql 账号/密码/默认的数据库 ; redis 的账号/密码 等 需要 更新 docker-compose.yml 的同时 更新一下 .env 文件下的配置
 
-
 ```bash
 # 一键启动/部署本地项目 node + redis + mysql
-docker-compose up -d 
+docker-compose up -d
 
 # 如果您只想 启动redis & mysql 用于 本地调试 npm run dev，   可以使用如命令
 
-docker-compose  -f docker-compose-no-node.yml  up -d 
+docker-compose  -f docker-compose-no-node.yml  up -d
 npm run dev
 
 ```
-
-
-
 
 ### 安装依赖
 
@@ -80,8 +76,7 @@ npm i
 npm run dev
 ```
 
-
-```
+````
 
 ### 模板目录说明
 
@@ -133,7 +128,7 @@ npm run dev
 │ └─schema.prisma --------- // 【重要】ORM Model维护
 └─tsconfig.json
 
-```
+````
 
 ## 三、项目配置
 
@@ -147,7 +142,7 @@ DATABASE_URL="mysql://root:my-secret-pw@localhost:3307/node_template"
 
 ```
 
-若要配置[多个数据库链接，可以点击这里看看](https://github.com/prisma/prisma/issues/2443#issuecomment-630679118) 
+若要配置[多个数据库链接，可以点击这里看看](https://github.com/prisma/prisma/issues/2443#issuecomment-630679118)
 
 同步数据库+基础表
 
@@ -494,6 +489,8 @@ npm run dev
 ![](https://cdn-1252273386.cos.ap-guangzhou.myqcloud.com/images/a42a634911ee5ccc6478308cbdfbdb00.png)
 
 ## 五、打包部署
+
+> 仅仅只打包 当前的 node 服务； 如果要同时 打包 mysql + redis + node 服务 建议使用 文档初 的 docker-compose.yml ; 我们已经默认帮你处理好 容器之间的通信 及 访问问题
 
 ```bash
 
