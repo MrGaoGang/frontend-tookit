@@ -59,7 +59,7 @@ docker-compose up -d
 
 # 如果您只想 启动redis & mysql 用于 本地调试 npm run dev，   可以使用如命令
 
-docker-compose  -f docker-compose-no-node.yml  up -d
+docker-compose  -f docker-compose-base.yml  up -d
 npm run dev
 
 ```
