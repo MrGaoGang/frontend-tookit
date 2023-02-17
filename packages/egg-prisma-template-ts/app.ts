@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config()
 
+console.log(process.env, "========")
 export default class AppBootHook {
   constructor(app) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

@@ -11,12 +11,12 @@ logs/
 *.lock
 *.js
 !.autod.conf.js
-
+db/
 app/**/*.js
 test/**/*.js
 config/**/*.js
 app/**/*.map
 test/**/*.map
 config/**/*.map
-
+runtime_data/
 uploads/

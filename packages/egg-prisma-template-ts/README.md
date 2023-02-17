@@ -49,6 +49,18 @@ git clone https://github.com/MrGaoGang/frontend-tookit.git
 
 ```
 
+### 使用 docker-compose.yml 一键启动/部署此应用
+
+> 若有修改 mysql 账号/密码/默认的数据库 ; redis 的账号/密码 等 需要 更新 docker-compose.yml 的同时 更新一下 .env 文件下的配置
+
+
+```bash
+# 一键启动
+docker-compose run -d 
+
+```
+
+
 ### 安装依赖
 
 ```bash
@@ -56,6 +68,9 @@ git clone https://github.com/MrGaoGang/frontend-tookit.git
 npm i
 # 启动项目
 npm run dev
+```
+
+
 ```
 
 ### 模板目录说明
@@ -192,8 +207,9 @@ JWT_TOKEN_SECRET = "mrgaogang" # 记得换成自己的秘钥哦
 REDIS_PORT = 6379
 # redis host
 REDIS_HOST= "127.0.0.1"
-# redis 密码
-REDIS_PASSWORD = "auth"
+# redis 密码，如果使用docker-compose.yml 启动 需要再 ./config/redis/redis.conf 中配置 requirepass
+REDIS_PASSWORD = "my-secret-pw"
+
 
 ```
 
