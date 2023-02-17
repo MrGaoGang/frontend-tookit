@@ -1,5 +1,7 @@
 # 基于 docker 的 prisma + eggjs + typescript 的后端请求模板
 
+>  如果有用记得点击一下  ⭐️ 哦
+
 ## 一、拥有的能力
 
 - ✅ [prisma](https://www.prisma.io/docs/getting-started/quickstart): `ORM` 框架
@@ -45,8 +47,6 @@ eggjs 内置的插件:
 
 git clone https://github.com/MrGaoGang/frontend-tookit.git
 
-# 复制 egg-prisma-template-ts 即可
-
 ```
 
 ### 使用 docker-compose.yml 一键启动/部署此应用
@@ -71,6 +71,9 @@ npm run dev
 ### 安装依赖
 
 ```bash
+# 切换到  egg-prisma-template-ts 目录
+cd egg-prisma-template-ts
+
 # 安装依赖
 npm i
 # 启动项目
@@ -143,6 +146,8 @@ npm run dev
 DATABASE_URL="mysql://root:my-secret-pw@localhost:3307/node_template"
 
 ```
+
+若要配置[多个数据库链接，可以点击这里看看](https://github.com/prisma/prisma/issues/2443#issuecomment-630679118) 
 
 同步数据库+基础表
 

@@ -51,7 +51,7 @@ export default (appInfo: EggAppInfo) => {
       username: 'default',
       db: 0
       // this redis instance won't block app start
-      // weakDependent: true,
+      weakDependent: true,
     }
   };
 
