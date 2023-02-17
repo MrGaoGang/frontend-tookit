@@ -30,21 +30,6 @@ services:
     privileged: true # 使用该参数，container内的root拥有真正的root权限。否则，container内的root只是外部的一个普通用户权限
     ports:
       - 6379:6379
-  # node 模板
-  node-template:
-    build: ./
-    # 依赖于redis和mysql，在启动本服务之前会先启动依赖的服务
-    depends_on:
-      - mysql
-      - redis
-    networks: 
-      - my_network
-    ports:
-      - 7001:7001
-    container_name: template_node
-    environment: # 由于在不同的容器中部署redis/mysql/node 起 host 需要修改成对应的 service name
-      - REDIS_HOST=redis # redis 为上面的link 的 services redis 名称
-      - DATABASE_URL=mysql://root:my-secret-pw@mysql:3306/node_template  # 需要重新配置其用户名/密码/host/port/数据库名称
 
 networks:
   my_network:

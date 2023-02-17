@@ -46,7 +46,7 @@ export default (appInfo: EggAppInfo) => {
     Redis: require('ioredis'),
     client: {
       port: process.env.REDIS_PORT || 6379, // Redis port
-      host: process.env.REDIS_HOST || 'redis', // Redis host
+      host: process.env.REDIS_HOST || 'localhost', // Redis host
       password: process.env.REDIS_PASSWORD || 'my-secret-pw',
       username: 'default',
       db: 0

@@ -55,10 +55,17 @@ git clone https://github.com/MrGaoGang/frontend-tookit.git
 
 
 ```bash
-# 一键启动
-docker-compose run -d 
+# 一键启动/部署本地项目 node + redis + mysql
+docker-compose up -d 
+
+# 如果您只想 启动redis & mysql 用于 本地调试 npm run dev，   可以使用如命令
+
+docker-compose  -f docker-compose-no-node.yml  up -d 
+npm run dev
 
 ```
+
+
 
 
 ### 安装依赖
