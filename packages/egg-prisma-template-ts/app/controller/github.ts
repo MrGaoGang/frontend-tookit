@@ -4,7 +4,7 @@ import { Controller } from 'egg';
 export default class GithubController extends Controller {
   async login() {
     const ctx = this.ctx;
-    const { code = '8033cdd88eb6e6768ef5' } = ctx.request.query;
+    const { code = '' } = ctx.request.query;
     if (code) {
       if (!process.env.GITHUB_LOGIN_CLIENT_ID) {
         console.error('please config GITHUB_LOGIN_CLIENT_ID in .env file');
