@@ -49,7 +49,7 @@ export default (appInfo: EggAppInfo) => {
       host: process.env.REDIS_HOST || 'localhost', // Redis host
       password: process.env.REDIS_PASSWORD || 'my-secret-pw',
       username: 'default',
-      db: 0
+      db: 0,
       // this redis instance won't block app start
       weakDependent: true,
     }
